@@ -1,0 +1,36 @@
+module blink (clk, LED, activate_C1, activate_C2, activate_C3, activate_C4);
+
+input clk;
+output LED, activate_C1, activate_C2, activate_C3, activate_C4;
+
+reg [31:0] counter;
+reg LED_status;
+reg status;
+
+initial begin
+counter <= 32'b0;
+LED_status <= 1'b0;
+status <= 1'b1;
+end
+
+always @ (posedge clk) 
+begin
+counter <= counter + 1'b1;
+if (counter > 50000000)
+begin
+LED_status <= !LED_status;
+counter <= 32'b0;
+end
+
+
+end
+
+assign LED = LED_status;
+assign activate_C1 = status;
+assign activate_C2 = status;
+assign activate_C3 = status;
+assign activate_C4 = status;
+
+
+
+endmodule 
